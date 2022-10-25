@@ -24,12 +24,12 @@ export class UsersController {
     //     return this.usersService.updateEmail(dto)
     // }
 
-    // @ApiOperation({ summary: `Get list of all users` })
-    // @ApiResponse({ status: 200, type: [User] })
-    // @Get('get_all')
-    // getAll() {
-    //     return this.usersService.getAllUsers();
-    // }
+    @ApiOperation({ summary: `Get list of all users` })
+    @ApiResponse({ status: 200, type: [User] })
+    @Get('get_all')
+    getAll() {
+        return this.usersService.getAllUsers();
+    }
 
     // @ApiOperation({ summary: `Get user by unique username` })
     // @ApiResponse({ status: 200, type: User })
