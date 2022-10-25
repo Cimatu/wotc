@@ -5,15 +5,16 @@ import { TokenService } from "./token/token.service";
 import * as bcrypt from 'bcryptjs'
 import * as nodemailer from 'nodemailer'
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { SignInDto } from "./dto/sign-in.dto";
 
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: Number(process.env.SMTP_PORT),
-    secure: false,
-    auth: {
-        user: process.env.SMTP_USER || 'pavel.gurinovich.vit@gmail.com',
-        pass: process.env.SMTP_PASSWORD || 'pbiktgrovxvqnums'
-    }
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: Number(process.env.SMTP_PORT),
+  secure: false,
+  auth: {
+    user: process.env.SMTP_USER || 'pavel.gurinovich.vit@gmail.com',
+    pass: process.env.SMTP_PASSWORD || 'pbiktgrovxvqnums'
+  }
 } as SMTPTransport.Options)
 
 @Injectable()
@@ -39,7 +40,7 @@ export class AuthService {
     };
   }
 
-  async signIn(dto: CreateUserDto) {
+  async signIn(dto: SignInDto) {
     const user = await this.validateUser(dto);
     const tokens = await this.tokenService.generateTokens(user);
     await this.tokenService.saveToken(user.id, tokens.refreshToken);
@@ -50,7 +51,7 @@ export class AuthService {
   }
 
   async signOut(refreshToken: string) {
-      return await this.tokenService.deleteTokenByUser(refreshToken)
+    return await this.tokenService.deleteTokenByUser(refreshToken)
   }
 
   private async validateUser(dto: CreateUserDto) {

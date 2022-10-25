@@ -23,6 +23,7 @@ import UsersModule from './users/users.module';
       database: process.env.POSTGRES_DATABASE,
       entities: [User, Token],
       synchronize: true,
+      ssl: { rejectUnauthorized: false },
     }),
     UsersModule,
     AuthModule,
