@@ -63,14 +63,14 @@ export class UsersService {
             .getOne();
     }
 
-    // async updatePassword(email: string, password: string) {
-    //     return await this.userRepository
-    //         .createQueryBuilder()
-    //         .update(User)
-    //         .set({ password })
-    //         .where("email = :email", { email })
-    //         .execute();
-    // }
+    async updatePassword(email: string, password: string) {
+        return await this.userRepository
+            .createQueryBuilder()
+            .update(User)
+            .set({ password })
+            .where("email = :email", { email })
+            .execute();
+    }
 
     // async deteteUserById(id: number) {
     //     const user = this.getUserById(id);

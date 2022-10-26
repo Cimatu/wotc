@@ -2,9 +2,10 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { AuthService } from "./auth.service";
+import { RecoveryDto } from './dto/password-recovery.dto';
+import { SetNewPasswordDto } from './dto/set-new-password.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignOutDto } from './dto/sign-out.dto';
-// import { RecoveryDto, SetNewPasswordDto } from './dto/recovery.dto';
 
 
 @ApiTags('Authorization')
@@ -31,19 +32,19 @@ export class AuthController {
         return this.authService.signOut(dto.refreshToken)
     }
 
-    // @ApiOperation({ summary: 'Sign up for admin' })
-    // @Post('restore_password')
-    // restorePassword(@Body() dto: RecoveryDto) {
-    //     return this.authService.restorePassword(dto.email, dto.link)
-    // }
+    @ApiOperation({ summary: 'Restore password' })
+    @Post('restore_password')
+    restorePassword(@Body() dto: RecoveryDto) {
+        return this.authService.restorePassword(dto.email, dto.link)
+    }
 
-    // @ApiOperation({ summary: 'Password recovery' })
-    // @Post('set_new_password')
-    // setNewPassword(
-    //     @Query('id') id: number,
-    //     @Query('token') token: string,
-    //     @Body() dto: SetNewPasswordDto
-    // ) {
-    //     return this.authService.setNewPassword(id, token, dto)
-    // }
+    @ApiOperation({ summary: 'Set new password' })
+    @Post('set_new_password')
+    setNewPassword(
+        @Query('id') id: number,
+        @Query('token') token: string,
+        @Body() dto: SetNewPasswordDto
+    ) {
+        return this.authService.setNewPassword(id, token, dto)
+    }
 }
