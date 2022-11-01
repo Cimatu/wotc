@@ -4,6 +4,7 @@ import { User } from "src/users/users.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import Token from "./token.entity";
 import { Repository } from "typeorm";
+import { PayloadDto } from "./dto/payload.dto";
 
 @Injectable()
 export class TokenService {
@@ -35,6 +36,11 @@ export class TokenService {
             return await this.tokenRepository.save(tokenData);
         }
         return await this.tokenRepository.save({ userId, refreshToken })
+    }
+
+    async getRoleByToken(token: string) {
+        const payload: any = await this.jwtService.decode(token);
+        return payload.role;
     }
 
     async deleteToken(refreshToken: string) {

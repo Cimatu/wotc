@@ -16,8 +16,7 @@ export class RecoveryService {
     async generateCode(userId: number,) {
         const min = Math.ceil(100000);
         const max = Math.floor(999999);
-
-        console.log(1)
+        
         const payload = String(Math.floor(Math.random() * (max - min)) + min);
         const recoveryCode = this.jwtService.sign(payload, { secret: `${process.env.JWT_ACCESS_SECRET}`, expiresIn: '1d' })
         await this.saveCode(userId, recoveryCode)
