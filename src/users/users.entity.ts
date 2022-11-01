@@ -18,5 +18,5 @@ export class User {
 
     @ApiProperty({ example: 'user', description: 'User role, default: manager' })
     @Column({ type: 'enum', enum: Role, default: Role.MANAGER })
-    role: Role; 
+    role: Role;
 }

@@ -6,6 +6,9 @@ import * as bcrypt from 'bcryptjs'
 import * as nodemailer from 'nodemailer'
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { SignInDto } from "./dto/sign-in.dto";
+import { CodeModule } from "./recoveryCode/code.module";
+import { RecoveryService } from "./recoveryCode/code.service";
+import { SetNewPasswordDto } from "./dto/set-new-password.dto";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -22,6 +25,7 @@ export class AuthService {
   constructor(
     private tokenService: TokenService,
     private userService: UsersService,
+    private recoveryService: RecoveryService
   ) { }
 
   async signUp(dto: CreateUserDto) {
@@ -46,7 +50,8 @@ export class AuthService {
     await this.tokenService.saveToken(user.id, tokens.refreshToken);
     return {
       ...tokens,
-      userId: user.id
+      userId: user.id,
+      role: user.role
     };
   }
 
@@ -64,23 +69,17 @@ export class AuthService {
     throw new UnauthorizedException({ message: 'Incorrect email or passwrod' })
   }
 
-  async restorePassword(email: string, link: string) {
-    link = link || 'https://wotc-nest.herokuapp.com/restore-password';
+  async restorePassword(email: string) {
     const user = await this.userService.getUserByEmail(email);
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
-    const payload = {
-      email,
-      password: user.password
-    };
-    const secret = process.env.JWT_ACCESS_SECRET + user.password;
-    const token = await this.tokenService.generateLink(payload, secret)
-    const recoverLink = `${link}/${user.id}/${token}`;
-    return await this.sendRecoveryEmail(email, recoverLink)
+    const code = await this.recoveryService.generateCode(user.id)
+
+    return await this.sendRecoveryEmail(email, code)
   }
 
-  async sendRecoveryEmail(to: string, link: string) {
+  async sendRecoveryEmail(to: string, code: string) {
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
@@ -89,22 +88,22 @@ export class AuthService {
       html:
         `
           <div>
-              <h1>Hello, ${to}! Please, follow this link to recover your password.</h1>
-              <a href="${link}">${link}</a>
+              <h1>Hello, ${to}! This is your recovery code.</h1>
+              <h1>${code}</h1>
           </div>
           `
     })
   }
 
-  async setNewPassword(id: number, token: string, dto) {
-    const { password1, password2 } = dto;
+  async setNewPassword(id: number, dto: SetNewPasswordDto) {
+    const { recoveryCode, password1, password2 } = dto;
     const user = await this.userService.getUserById(id);
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
-    const secret = process.env.JWT_ACCESS_SECRET + user.password;
-    const checkPayload = this.tokenService.validateLink(token, secret)
-    if (!checkPayload) {
+
+    const checkCode = this.recoveryService.validateCode(String(recoveryCode))
+    if (!checkCode) {
       throw new HttpException('Wrong user data', HttpStatus.BAD_REQUEST);
     }
     if (password1 !== password2) {

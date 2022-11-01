@@ -35,16 +35,15 @@ export class AuthController {
     @ApiOperation({ summary: 'Restore password' })
     @Post('restore_password')
     restorePassword(@Body() dto: RecoveryDto) {
-        return this.authService.restorePassword(dto.email, dto.link)
+        return this.authService.restorePassword(dto.email)
     }
-
+    
     @ApiOperation({ summary: 'Set new password' })
     @Post('set_new_password')
     setNewPassword(
         @Query('id') id: number,
-        @Query('token') token: string,
         @Body() dto: SetNewPasswordDto
     ) {
-        return this.authService.setNewPassword(id, token, dto)
+        return this.authService.setNewPassword(id, dto)
     }
 }

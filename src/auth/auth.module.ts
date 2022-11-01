@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { JwtModule } from "@nestjs/jwt";
 import UsersModule from 'src/users/users.module';
 import { TokenModule } from './token/token.module';
+import { CodeModule } from './recoveryCode/code.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { TokenModule } from './token/token.module';
   imports: [
     TokenModule,
     UsersModule,
-    JwtModule
+    JwtModule,
+    CodeModule
   ],
   exports: [
     AuthService,

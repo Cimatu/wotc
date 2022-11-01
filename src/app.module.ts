@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import RecoveryCode from './auth/recoveryCode/code.entity';
+import { CodeModule } from './auth/recoveryCode/code.module';
 import Token from './auth/token/token.entity';
 import { TokenModule } from './auth/token/token.module';
 import { User } from './users/users.entity';
@@ -21,13 +23,14 @@ import UsersModule from './users/users.module';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
-      entities: [User, Token],
+      entities: [User, Token, RecoveryCode],
       synchronize: true,
-      ssl: { rejectUnauthorized: false },
+      // ssl: { rejectUnauthorized: false },
     }),
     UsersModule,
     AuthModule,
-    TokenModule
+    TokenModule,
+    CodeModule
   ],
 })
 export class AppModule { }
