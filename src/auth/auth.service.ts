@@ -79,7 +79,7 @@ export class AuthService {
     return await this.sendRecoveryEmail(email, code)
   }
 
-  async sendRecoveryEmail(to: string, code: string) {
+  async sendRecoveryEmail(to: string, code: number) {
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
@@ -102,10 +102,8 @@ export class AuthService {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
 
-    const checkCode = this.recoveryService.validateCode(String(recoveryCode))
-    if (!checkCode) {
-      throw new HttpException('Wrong user data', HttpStatus.BAD_REQUEST);
-    }
+    await this.recoveryService.validateCode(id, recoveryCode)
+
     if (password1 !== password2) {
       throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);
     }

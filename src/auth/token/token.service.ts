@@ -35,7 +35,7 @@ export class TokenService {
             tokenData.refreshToken = refreshToken;
             return await this.tokenRepository.save(tokenData);
         }
-        return await this.tokenRepository.save({ userId, refreshToken })
+        return await this.tokenRepository.save({ userId, refreshToken });
     }
 
     async getRoleByToken(token: string) {
@@ -48,7 +48,7 @@ export class TokenService {
         if (!token) {
             throw new HttpException("Token not found", HttpStatus.NOT_FOUND);
         }
-        return await this.tokenRepository.delete(token.id)
+        return await this.tokenRepository.delete(token.id);
     }
 
     async deleteTokenByUser(refreshStr: string) {
@@ -56,7 +56,7 @@ export class TokenService {
         if (!token) {
             throw new HttpException("Token not found", HttpStatus.NOT_FOUND);
         }
-        return await this.tokenRepository.delete(token.id)
+        return await this.tokenRepository.delete(token.id);
     }
 
     async getToken(refreshToken: string) {
@@ -82,6 +82,6 @@ export class TokenService {
     }
 
     async validateLink(token: string, secret: string) {
-        return await this.jwtService.verify(token, { secret: secret })
+        return await this.jwtService.verify(token, { secret: secret });
     }
 }
