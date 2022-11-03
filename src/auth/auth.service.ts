@@ -9,6 +9,7 @@ import { SignInDto } from "./dto/sign-in.dto";
 import { CodeModule } from "./recoveryCode/code.module";
 import { RecoveryService } from "./recoveryCode/code.service";
 import { SetNewPasswordDto } from "./dto/set-new-password.dto";
+import { VerifyCodeDto } from "./dto/verify-code.dto";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -95,14 +96,21 @@ export class AuthService {
     })
   }
 
+  async verifyCode(dto: VerifyCodeDto) {
+    const { email, code } = dto;
+    const user = await this.userService.getUserByEmail(email);
+    if (!user) {
+      throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
+    }
+    return await this.recoveryService.validateCode(user.id, code);
+  }
+
   async setNewPassword(id: number, dto: SetNewPasswordDto) {
-    const { recoveryCode, password1, password2 } = dto;
+    const { password1, password2 } = dto;
     const user = await this.userService.getUserById(id);
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
-
-    await this.recoveryService.validateCode(id, recoveryCode)
 
     if (password1 !== password2) {
       throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);

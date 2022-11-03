@@ -6,6 +6,7 @@ import { RecoveryDto } from './dto/password-recovery.dto';
 import { SetNewPasswordDto } from './dto/set-new-password.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignOutDto } from './dto/sign-out.dto';
+import { VerifyCodeDto } from './dto/verify-code.dto';
 
 
 @ApiTags('Authorization')
@@ -37,6 +38,13 @@ export class AuthController {
     restorePassword(@Body() dto: RecoveryDto) {
         return this.authService.restorePassword(dto.email)
     }
+
+    @ApiOperation({ summary: 'Verify code' })
+    @Post('verify_code')
+    verifyCode(@Body() dto: VerifyCodeDto) {
+        return this.authService.verifyCode(dto)
+    }
+
     
     @ApiOperation({ summary: 'Set new password' })
     @Post('set_new_password')

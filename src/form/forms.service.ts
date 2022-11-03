@@ -18,7 +18,18 @@ export class FormsService {
     // }
 
     async fillTheForm() {
-        const browser = await puppeteer.launch({ headless: false })
+
+        const browser = await puppeteer.launch({
+            headless: false,
+            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+            defaultViewport: null,
+            ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
+            args: ['--disable-extensions-except=/path/to/my/extension',
+                '--load-extension=/path/to/my/extension',
+                '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
+                //'--profile-directory=Profile 1'
+            ]
+        })
         const page = await browser.newPage();
 
         await page.goto('https://eddservices.edd.ca.gov/ewotc/secure/')
@@ -40,7 +51,7 @@ export class FormsService {
         });
 
         const formPage = await browser.newPage();
-        
+
         await formPage.goto('https://eddservices.edd.ca.gov/ewotc/secure/NewApplication.aspx');
 
         await page.type('#txtFirstName', 'Pavel');
