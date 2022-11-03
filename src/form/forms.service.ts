@@ -21,14 +21,14 @@ export class FormsService {
 
         const browser = await puppeteer.launch({
             headless: false,
-            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-            defaultViewport: null,
-            ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
-            args: ['--disable-extensions-except=/path/to/my/extension',
-                '--load-extension=/path/to/my/extension',
-                '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
-                //'--profile-directory=Profile 1'
-            ]
+            // executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+            // // defaultViewport: null,
+            // // ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
+            // // args: ['--disable-extensions-except=/path/to/my/extension',
+            // //     '--load-extension=/path/to/my/extension',
+            // //     '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
+            // //     //'--profile-directory=Profile 1'
+            // // ]
         })
         const page = await browser.newPage();
 
