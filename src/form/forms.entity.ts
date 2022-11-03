@@ -1,15 +1,15 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 
-@Entity('users')
-export class User {
+@Entity('forms')
+class Form {
     @ApiProperty({ example: 1, description: 'Unique identificator' })
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     txtFirstName: string;
-    
+
     @Column()
     txtLastName: string;
 
@@ -157,3 +157,5 @@ export class User {
     @Column()
     txtEligibilitySources: string; //last field
 }
+
+export default Form
