@@ -28,7 +28,7 @@ import Form from './form/forms.entity'
       database: process.env.POSTGRES_DATABASE,
       entities: [User, Token, RecoveryCode, Form],
       synchronize: true,
-      // ssl: { rejectUnauthorized: false },
+      ssl: { rejectUnauthorized: false },
     }),
     UsersModule,
     AuthModule,
