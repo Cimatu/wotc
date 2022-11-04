@@ -102,13 +102,13 @@ export class AuthService {
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
-    return await this.recoveryService.validateCode(user.id, code);
+    return user.id ? this.recoveryService.validateCode(user.id, code) : false;
   }
 
   async setNewPassword(dto: SetNewPasswordDto) {
-    const { email, password1, password2 } = dto;
+    const { userId, password1, password2 } = dto;
 
-    const user = await this.userService.getUserByEmail(email);
+    const user = await this.userService.getUserById(userId);
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }

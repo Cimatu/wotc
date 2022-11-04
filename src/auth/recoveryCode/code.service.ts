@@ -17,7 +17,7 @@ export class RecoveryService {
         const max = Math.floor(999999);
 
         const payload = { code: Math.floor(Math.random() * (max - min)) + min }
-        const recoveryCode = this.jwtService.sign(payload, { secret: `${process.env.JWT_ACCESS_SECRET}`, expiresIn: '30m' })
+        const recoveryCode = this.jwtService.sign(payload, { expiresIn: '30m' })
         await this.saveCode(userId, recoveryCode)
         return payload.code;
     }
@@ -68,6 +68,6 @@ export class RecoveryService {
     }
 
     async compareCode(code: number) {
-        
+
     }
 }
