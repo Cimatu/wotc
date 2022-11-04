@@ -4,7 +4,7 @@ import { IsEmail, IsNumber, IsString } from "class-validator";
 export class VerifyCodeDto {
 
     @ApiProperty({ example: 123456, description: 'New password' })
-    @IsNumber({}, { message: 'Should be string' })
+    @IsNumber({}, { message: 'Should be number' })
     code: number;
 
     @ApiProperty({ example: 'dimasikpodpivasik@gmail.com', description: 'Unique username' })

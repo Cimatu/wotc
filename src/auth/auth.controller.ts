@@ -45,13 +45,9 @@ export class AuthController {
         return this.authService.verifyCode(dto)
     }
 
-    
     @ApiOperation({ summary: 'Set new password' })
     @Post('set_new_password')
-    setNewPassword(
-        @Query('id') id: number,
-        @Body() dto: SetNewPasswordDto
-    ) {
-        return this.authService.setNewPassword(id, dto)
+    setNewPassword(@Body() dto: SetNewPasswordDto) {
+        return this.authService.setNewPassword(dto)
     }
 }

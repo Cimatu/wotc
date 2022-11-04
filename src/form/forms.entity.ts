@@ -7,75 +7,135 @@ class Form {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty({ example: 'Pavel', description: 'First name' })
     @Column()
     txtFirstName: string;
 
+    @ApiProperty({ example: 'Hurin', description: 'Last name' })
     @Column()
     txtLastName: string;
 
+    @ApiProperty({ example: '123-12-1234', description: 'Social security no.' })
     @Column()
     txtSSN: string;
+
+    @ApiProperty({ example: 'Avlabari 8', description: 'Street Address' })
     @Column()
     txtStreet: string;
+
+    @ApiProperty({ example: 'Avlabari 8', description: 'City or Town' })
     @Column()
     txtCity: string;
+
+    @ApiProperty({ example: 'Homel voblast', description: 'State' })
     @Column()
     txtState: string;
+
+    @ApiProperty({ example: '12345', description: 'ZIP Code' })
     @Column()
     txtZip: string;
 
     //employeer
+    @ApiProperty({ example: '12-1234567', description: 'FIEN' })
     @Column()
     txtFEIN: string;
+
+    @ApiProperty({ example: '12-1234567', description: "Employer's Name" })
     @Column()
     txtErName: string;
+
+    @ApiProperty({ example: '(123) 123-1234', description: "Telephone" })
     @Column()
     txtErPhone: string;
+
+    @ApiProperty({ example: 'AVLABARI 8', description: "Street Address" })
     @Column()
     txtErStreet: string;
+
+    @ApiProperty({ example: 'Sacramento', description: "City or Town" })
     @Column()
     txtErCity: string;
+
+    @ApiProperty({ example: 'CA', description: "State" })
     @Column()
     txtErState: string;
+
+    @ApiProperty({ example: '23452', description: "ZIP Code" })
     @Column()
     txtErZip: string;
+
+    @ApiProperty({ example: 'Dimasik Gonapivasik', description: "Contact Name" })
     @Column()
     txtContactName: string;
+
+    @ApiProperty({ example: '(916) 221-1341', description: "Telephone" })
     @Column()
     txtContactPhone: string;
+
+    @ApiProperty({ example: '704 NATOMA ST', description: "Street Address" })
     @Column()
     txtContactStreet: string;
+
+    @ApiProperty({ example: 'FOLSOM', description: "City or Town" })
     @Column()
     txtContactCity: string;
+
+    @ApiProperty({ example: 'CA', description: "State" })
     @Column()
     txtContactState: string;
+
+    @ApiProperty({ example: '95630', description: "ZIP Code" })
     @Column()
     txtContactZip: string;
+    
+    @ApiProperty({ example: '4', description: "?????????" })
     @Column()
     ddlGroupNumber: string;
+
+    @ApiProperty({ example: '10/01/2022', description: "Gave Information" })
     @Column()
     txtInfoDate: string;
+
+    @ApiProperty({ example: '10/01/2022', description: "Was offered job" })
     @Column()
     txtOfferDate: string;
+
+    @ApiProperty({ example: '10/01/2022', description: "Was hired" })
     @Column()
     txtHireDate: string;
+
+    @ApiProperty({ example: '10/29/2022', description: "Started job" })
     @Column()
     txtStartDate: string;
 
+    @ApiProperty({ example: true, description: "Checkbox 1" })
     @Column()
-    chkItem1: boolean; //1
+    chkItem1: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 2" })
     @Column()
     chkItem2: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 3" })
     @Column()
     chkItem3: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 4" })
     @Column()
     chkItem4: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 5" })
     @Column()
     chkItem5: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 6" })
     @Column()
     chkItem6: boolean;
+
+    @ApiProperty({ example: true, description: "Checkbox 7" })
     @Column()
     ChkItem7: boolean;
+
     @Column()
     optPreviousEmployer: string; //8
     @Column()
@@ -84,7 +144,7 @@ class Form {
     @Column()
     txtStartWage: string; //10
     @Column()
-    ddlOccupation: string; //11
+    ddlOccupation: string; //11optPreviousEmployer_0
     @Column()
     optAgeUnder40: string; //12
     @Column()

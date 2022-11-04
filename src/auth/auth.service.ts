@@ -105,9 +105,10 @@ export class AuthService {
     return await this.recoveryService.validateCode(user.id, code);
   }
 
-  async setNewPassword(id: number, dto: SetNewPasswordDto) {
-    const { password1, password2 } = dto;
-    const user = await this.userService.getUserById(id);
+  async setNewPassword(dto: SetNewPasswordDto) {
+    const { email, password1, password2 } = dto;
+
+    const user = await this.userService.getUserByEmail(email);
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }

@@ -42,9 +42,10 @@ export class RecoveryService {
         return await this.recoveryRepository.delete(token.id)
     }
 
-    async getCode(recoveryCode: string) {
+    async getCode(recoveryCode: string): Promise<RecoveryCode> {
         return await this.recoveryRepository
             .createQueryBuilder('recoveryCodes')
+            .leftJoinAndSelect('recoveryCodes.user', 'user')
             .where('recoveryCodes.recoveryCode = :recoveryCode', { recoveryCode })
             .getOne();
     }
@@ -56,7 +57,7 @@ export class RecoveryService {
             .getOne();
     }
 
-    async validateCode(userId: number, userCode) {
+    async validateCode(userId: number, userCode: number) {
         const token = await this.getCodeByUserId(userId)
         const { code } = await this.jwtService.verify(token.recoveryCode, { secret: `${process.env.JWT_ACCESS_SECRET}` })
         if (code == userCode) {
@@ -64,5 +65,9 @@ export class RecoveryService {
         } else {
             throw new HttpException('Wrong code', HttpStatus.BAD_REQUEST);
         }
+    }
+
+    async compareCode(code: number) {
+        
     }
 }
