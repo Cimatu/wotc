@@ -61,7 +61,7 @@ export class RecoveryService {
         const token = await this.getCodeByUserId(userId)
         const { code } = await this.jwtService.verify(token.recoveryCode)
         if (code == userCode) {
-            return true;
+            return userId;
         } else {
             throw new HttpException('Wrong code', HttpStatus.BAD_REQUEST);
         }

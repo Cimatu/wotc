@@ -102,7 +102,7 @@ export class AuthService {
     if (!user) {
       throw new HttpException('User with such email not found', HttpStatus.BAD_REQUEST);
     }
-    return user.id ? this.recoveryService.validateCode(user.id, code) : false;
+    return await this.recoveryService.validateCode(user.id, code);
   }
 
   async setNewPassword(dto: SetNewPasswordDto) {
