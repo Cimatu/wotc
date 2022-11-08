@@ -59,7 +59,7 @@ export class RecoveryService {
 
     async validateCode(userId: number, userCode: number) {
         const token = await this.getCodeByUserId(userId)
-        const { code } = await this.jwtService.verify(token.recoveryCode, { secret: `${process.env.JWT_ACCESS_SECRET}` })
+        const { code } = await this.jwtService.verify(token.recoveryCode)
         if (code == userCode) {
             return true;
         } else {
