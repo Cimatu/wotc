@@ -14,7 +14,7 @@ export class FormController {
 
     @ApiOperation({ summary: 'Fill the form' })
     @Post('fill_the_form')
-    signUp(@Body() dto: CreateFormDto) {
-        return this.formsService.fillTheForm(dto)
+    signUp() {
+        return this.formsService.fillTheForm()
     }
 }
