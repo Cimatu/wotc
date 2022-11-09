@@ -181,15 +181,15 @@ export class CreateFormDto {
     @IsBoolean({ message: 'Should be true or false' })
     optVeteranUnemployed: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "14" })
     @IsBoolean({ message: 'Should be true or false' })
     optSnap6Months: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "OR, received SNAP benefits for at least a 3-month" })
     @IsBoolean({ message: 'Should be true or false' })
     optSnap3Months: boolean;
 
-    @ApiProperty({ example: "Sacramento CA", description: "City and State" })
+    @ApiProperty({ example: "Dima", description: "Primary Recipient" })
     @IsString({ message: 'Should be string' })
     txtSnapPrimaryRecipient: string;
 
@@ -197,83 +197,95 @@ export class CreateFormDto {
     @IsString({ message: 'Should be string' })
     txtSnapRecipientLocation: string;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "Were you referred to an employer by a Vocational Rehabilitation Agency approved by a State?" })
     @IsBoolean({ message: 'Should be true or false' })
-    optAssignmentOrganization: boolean;
+    optVocationalRehab: boolean;
+
+    @ApiProperty({ example: true, description: "by an Employment Network under the Ticket to Work Program" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optEmploymentNetwork: boolean;
+
+    @ApiProperty({ example: true, description: "by the Department of Veterans Affairs" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optVeteransAffair: boolean;
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optAssignmentOrganization: boolean;//????
+
+    @ApiProperty({ example: true, description: "16" })
     @IsBoolean({ message: 'Should be true or false' })
     optTanf18Months: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16 or" })
     @IsBoolean({ message: 'Should be true or false' })
-    optTanfAny18Months: boolean; //16
+    optTanfAny18Months: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16 or" })
     @IsBoolean({ message: 'Should be true or false' })
-    optTanfNotEligible: boolean; //16
+    optTanfNotEligible: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16a" })
     @IsBoolean({ message: 'Should be true or false' })
-    optTanfAny9Months: boolean; //16
+    optTanfAny9Months: boolean;
+
+    @ApiProperty({ example: "Dima", description: "Primary Recipient" })
+    @IsString({ message: 'Should be string' })
+    txtTanfPrimaryRecipient: string;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtTanfPrimaryRecipient: string; //16
+    txtTanfRecipientLocation: string;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optExFelon: boolean;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtTanfRecipientLocation: string; //16
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optExFelon: boolean; //17
+    txtConvictionDate: string; 
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtConvictionDate: string; //17
+    txtReleaseDate: string;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optConvictionType: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optInRuralRenewalCounty: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optEmpowermentZone: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optReceivedSSI: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optUnemployedVeteran6Months: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optUnemployedVeteran4Weeks: boolean;
+
+    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @IsBoolean({ message: 'Should be true or false' })
+    optLTUrecipient27weeks: boolean;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtReleaseDate: string; //17
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optConvictionType: boolean;//17
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optInRuralRenewalCounty: boolean; //18
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optEmpowermentZone: boolean; //19
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optReceivedSSI: boolean; //20
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optUnemployedVeteran6Months: boolean; //21
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optUnemployedVeteran4Weeks: boolean; //22
-
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
-    @IsBoolean({ message: 'Should be true or false' })
-    optLTUrecipient27weeks: boolean; //23
+    txtLtuBenefitsState: string;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtLtuBenefitsState: string; //23
+    txtSafStartDate: string;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @IsString({ message: 'Should be string' })
-    txtSafStartDate: string; //23
-
-    @ApiProperty({ example: "Sacramento CA", description: "City and State" })
-    @IsString({ message: 'Should be string' })
-    txtEligibilitySources: string; //last field
+    txtEligibilitySources: string;
 }

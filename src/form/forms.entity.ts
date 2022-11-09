@@ -138,15 +138,15 @@ class Form {
 
     @ApiProperty({ example: true, description: "Have you worked for this employer?" })
     @Column()
-    optPreviousEmployer: boolean; //8
+    optPreviousEmployer: boolean;
 
     @ApiProperty({ example: '12/12/2013', description: "If YES, enter last date of employment" })
     @Column()
-    txtLastEmploymentDate: string; //8
+    txtLastEmploymentDate: string;
 
     @ApiProperty({ example: '12.3', description: "Starting Wage/Hour" })
     @Column()
-    txtStartWage: string; //10
+    txtStartWage: string;
 
     @ApiProperty({ example: 'Architecture & Engineering', description: "Occupation" })
     @Column()
@@ -154,7 +154,7 @@ class Form {
 
     @ApiProperty({ example: true, description: "Are you at least age 16, but under age 40?" })
     @Column()
-    optAgeUnder40: boolean; //12
+    optAgeUnder40: boolean;
 
     @ApiProperty({ example: 'Architecture & Engineering', description: "Please enter your date of birth" })
     @Column()
@@ -170,61 +170,74 @@ class Form {
 
     @ApiProperty({ example: "Dima", description: "Primary Recipient" })
     @Column()
-    txtVeteranSnapPrimaryRecipient: string; // 13
+    txtVeteranSnapPrimaryRecipient: string;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @Column()
-    txtVeteranSnapRecipientLocation: string; // 13
+    txtVeteranSnapRecipientLocation: string;
+
+    @ApiProperty({ example: true, description: "Were you referred to an employer by a Vocational Rehabilitation Agency approved by a State?" })
+    @Column()
+    optVocationalRehab: boolean;
+
+    @ApiProperty({ example: true, description: "by an Employment Network under the Ticket to Work Program" })
+    @Column()
+    optEmploymentNetwork: boolean;
+
+    @ApiProperty({ example: true, description: "by the Department of Veterans Affairs" })
+    @Column()
+    optVeteransAffair: boolean
     
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optVeteranDisability: boolean; //13
+    optVeteranDisability: boolean;
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optVeteranDischarged: boolean; //13
+    optVeteranDischarged: boolean
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optVeteranUnemployed: boolean; //13
+    optVeteranUnemployed: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "14" })    
     @Column()
-    optSnap6Months: boolean; //14
+    optSnap6Months: boolean;
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "OR, received SNAP benefits for at least a 3-month" })
     @Column()
-    optSnap3Months: boolean; //14
+    optSnap3Months: boolean;
+
+    @ApiProperty({ example: "Dima", description: "Primary Recipient" })
+    @Column()
+    txtSnapPrimaryRecipient: string;
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @Column()
-    txtSnapPrimaryRecipient: string; //14
-
-    @ApiProperty({ example: "Sacramento CA", description: "City and State" })
-    @Column()
-    txtSnapRecipientLocation: string; //14
+    txtSnapRecipientLocation: string;
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optAssignmentOrganization: boolean; //15
+    optAssignmentOrganization: boolean;//???
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16" })
     @Column()
-    optTanf18Months: string; //16
+    optTanf18Months: boolean; //16
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16 or" })
     @Column()
-    optTanfAny18Months: string; //16
+    optTanfAny18Months: boolean; //16
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16 or" })
     @Column()
-    optTanfNotEligible: string; //16
+    optTanfNotEligible: boolean; //16
 
-    @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
+    @ApiProperty({ example: true, description: "16a" })
     @Column()
-    optTanfAny9Months: string; //16
+    optTanfAny9Months: boolean; //16
 
-    @ApiProperty({ example: "Sacramento CA", description: "City and State" })
+    @ApiProperty({ example: "Dima", description: "Primary Recipient" })
+
     @Column()
     txtTanfPrimaryRecipient: string; //16
 
@@ -234,7 +247,7 @@ class Form {
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optExFelon: string; //17
+    optExFelon: boolean; //17
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @Column()
@@ -246,31 +259,31 @@ class Form {
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optConvictionType: string;//17
+    optConvictionType: boolean;//17
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optInRuralRenewalCounty: string; //18
+    optInRuralRenewalCounty: boolean; //18
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optEmpowermentZone: string; //19
+    optEmpowermentZone: boolean; //19
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optReceivedSSI: string; //20
+    optReceivedSSI: boolean; //20
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optUnemployedVeteran6Months: string; //21
+    optUnemployedVeteran6Months: boolean; //21
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optUnemployedVeteran4Weeks: string; //22
+    optUnemployedVeteran4Weeks: boolean; //22
 
     @ApiProperty({ example: true, description: "Are you a Veteran of the U.S. Armed Forces?" })
     @Column()
-    optLTUrecipient27weeks: string; //23
+    optLTUrecipient27weeks: boolean; //23
 
     @ApiProperty({ example: "Sacramento CA", description: "City and State" })
     @Column()
