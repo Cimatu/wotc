@@ -40,19 +40,19 @@ export class FormsService {
 
         await page.screenshot({ path: './loginPasha.png', fullPage: true });
 
-        const button = await page.$('.submitButton')
+        try {
+            const button = await page.$('.submitButton')
+            await button.click();
+        } catch (e) {
+            console.log(e)
+        }
 
-        await button.click();
         await page.screenshot({
             path: './loginAfterSubmit.png',
             fullPage: true,
         });
 
         const formPage = await browser.newPage();
-
-        await formPage.goto('https://eddservices.edd.ca.gov/ewotc/secure/NewApplication.aspx');
-
-        await page.type(`#txtFirstName`, 'txtFirstName');
 
         // const { txtFirstName, txtLastName, txtSSN, txtStreet, txtCity, txtState, txtZip } = dto;
         // await page.type(`#txtFirstName`, txtFirstName);
