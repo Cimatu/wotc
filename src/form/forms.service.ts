@@ -18,7 +18,7 @@ export class FormsService {
     //     return await this.userRepository.save(admin);
     // }
 
-    async fillTheForm(dto: CreateFormDto) {
+    async fillTheForm() {
         const browser = await puppeteer.launch({
             headless: false,
             // executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
