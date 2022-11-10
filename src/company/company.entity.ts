@@ -9,11 +9,11 @@ class Company {
     id: number;
 
     @ApiProperty({ example: "VironIT", description: 'Company name' })
-    @Column()
+    @Column({ nullable: true })
     companyName: string;
 
     @ApiProperty({ example: "12-1234567", description: 'FIEN' })
-    @Column()
+    @Column({ nullable: true })
     fein: string;
 
     @ApiProperty({ example: "CA", description: 'State' })
