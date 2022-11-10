@@ -2,12 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from './pipes/validation.pipe';
+import StealthPlugin from "puppeteer-extra-plugin-stealth"
+import puppeteer from 'puppeteer-extra';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-
+  puppeteer.use(StealthPlugin())
+  
   const config = new DocumentBuilder()
     .setTitle(`WOTC Wiz`)
     .setDescription(`REST API Docs`)

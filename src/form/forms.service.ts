@@ -2,7 +2,9 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Form from './forms.entity';
-import puppeteer from 'puppeteer';
+import StealthPlugin from "puppeteer-extra-plugin-stealth"
+import puppeteer from 'puppeteer-extra';
+
 import { CreateFormDto } from './dto/create-form.dto';
 
 @Injectable()
@@ -19,40 +21,47 @@ export class FormsService {
     // }
 
     async fillTheForm() {
-        const browser = await puppeteer.launch({
-            headless: false,
-            // executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-            // defaultViewport: null,
-            // ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
-            // args: ['--disable-extensions-except=/path/to/my/extension',
-            //     '--load-extension=/path/to/my/extension',
-            //     '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
-            //     //'--profile-directory=ProfileF 1'
-            // ]
-        })
+        const browser = await puppeteer
+            .use(StealthPlugin())
+            .launch({   
+                headless: false,
+                executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+                // defaultViewport: null,
+                ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
+                // args: ['--disable-extensions-except=/path/to/my/extension',
+                //     '--load-extension=/path/to/my/extension',
+                //     '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
+                //     //'--profile-directory=ProfileF 1'
+                // ]
+            })
         const page = await browser.newPage();
 
         await page.goto('https://eddservices.edd.ca.gov/ewotc/secure/')
 
-
         await page.type('#username', 'wotcwiz22');
-        await page.type('#password', 'Wotcwiz22!');
+        await page.type('#txtPassword', 'Wotcwiz22!');
 
         await page.screenshot({ path: './loginPasha.png', fullPage: true });
 
-        try {
-            const button = await page.$('.submitButton')
-            await button.click();
-        } catch (e) {
-            console.log(e)
-        }
+        // const button = await page.$('.submitButton')
+        // await button.click();
+        await page.keyboard.press('Enter');
+
+        // const form = await browser.newPage();
+
+        // await page.goto('https://eddservices.edd.ca.gov/ewotc/secure/NewApplication.aspx');
+        // await page.type(`#txtFirstName`, 'txtFirstName');
+        // await page.type(`#txtLastName`, 'txtLastName');
+        // await page.type(`#txtSSN`, 'txtSSN');
+        // await page.type(`#txtStreet`, 'txtStreet');
+        // await page.type(`#txtCity`, 'txtCity');
+        // await page.type(`#txtState`, 'txtState');
+        // await page.type(`#txtZip`, 'txtZip');
 
         await page.screenshot({
             path: './loginAfterSubmit.png',
             fullPage: true,
         });
-
-        const formPage = await browser.newPage();
 
         // const { txtFirstName, txtLastName, txtSSN, txtStreet, txtCity, txtState, txtZip } = dto;
         // await page.type(`#txtFirstName`, txtFirstName);

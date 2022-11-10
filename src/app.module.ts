@@ -10,7 +10,8 @@ import { FormModule } from './form/forms.module';
 import { User } from './users/users.entity';
 import UsersModule from './users/users.module';
 import Form from './form/forms.entity'
-
+import { CompanyModule } from './company/company.module';
+import Company from './company/company.entity';
 
 @Module({
   providers: [],
@@ -26,7 +27,7 @@ import Form from './form/forms.entity'
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
-      entities: [User, Token, RecoveryCode, Form],
+      entities: [User, Token, RecoveryCode, Form, Company],
       synchronize: true,
       ssl: { rejectUnauthorized: false },
     }),
@@ -34,7 +35,8 @@ import Form from './form/forms.entity'
     AuthModule,
     TokenModule,
     CodeModule,
-    FormModule
+    FormModule,
+    CompanyModule
   ],
 })
 export class AppModule { }
