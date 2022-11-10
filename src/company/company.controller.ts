@@ -17,14 +17,14 @@ export class CompanyController {
         return this.companyService.createCompany(dto);
     }
 
-    @ApiOperation({ summary: 'User update' })
+    @ApiOperation({ summary: 'Company update' })
     @ApiResponse({ status: 200, type: Company })
     @Post('update')
     update(@Query('id') id: number, @Body() dto: CreateCompanyDto) {
         return this.companyService.updateCompanyById(id, dto)
     }
 
-    @ApiOperation({ summary: `Get list of all users` })
+    @ApiOperation({ summary: `Get company by id` })
     @ApiResponse({ status: 200, type: Company })
     @Get('get_by_id')
     getById(@Query('id') id: number) {
