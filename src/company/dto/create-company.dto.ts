@@ -8,7 +8,7 @@ export class CreateCompanyDto {
 
     @ApiProperty({ example: "12-1234567", description: 'FIEN' })
     @IsString()
-    fien: string;
+    fein: string;
 
     @ApiProperty({ example: "CA", description: 'State' })
     @IsString()
