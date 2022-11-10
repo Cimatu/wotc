@@ -10,7 +10,7 @@ class Company {
 
     @ApiProperty({ example: "VironIT", description: 'Company name' })
     @Column()
-    name: string;
+    companyName: string;
 
     @ApiProperty({ example: "12-1234567", description: 'FIEN' })
     @Column()
@@ -22,7 +22,7 @@ class Company {
 
     @ApiProperty({ example: 123456, description: 'ZIP' })
     @Column({ nullable: true })
-    zip: number;
+    zip: string;
 
     @ApiProperty({ example: "Moskovskaya", description: 'Street' })
     @Column({ nullable: true })

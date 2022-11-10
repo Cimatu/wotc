@@ -4,7 +4,7 @@ import { IsEmail, IsNumber, IsString, Length, } from "class-validator";
 export class CreateCompanyDto {
     @ApiProperty({ example: "VironIT", description: 'Company name' })
     @IsString()
-    name: string;
+    companyName: string;
 
     @ApiProperty({ example: "12-1234567", description: 'FIEN' })
     @IsString()
@@ -16,7 +16,7 @@ export class CreateCompanyDto {
 
     @ApiProperty({ example: 123456, description: 'ZIP' })
     @IsNumber()
-    zip: number;
+    zip: string;
 
     @ApiProperty({ example: "Moskovskaya", description: 'Street' })
     @IsString()
