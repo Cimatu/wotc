@@ -52,5 +52,18 @@ export class CompanyService {
             .getOne();
     }
 
+    async deleteCompanyById(id: number) {
+        let event = await this.getCompanyById(id);
+        if (!event) {
+            throw new HttpException("Company not found", HttpStatus.NOT_FOUND);
+        }
+        await this.companyRepository.delete(id);
+        event = await this.getCompanyById(id);
+        if (!event) {
+            return { message: "Company was successfuly deleted" }
+        } else {
+            return { message: "Company wasn't deleted" }
+        }
+    }
 
 }

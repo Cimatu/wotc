@@ -38,10 +38,10 @@ export class CompanyController {
     //     return this.usersService.getUserByUsername(username);
     // }
 
-    // @ApiOperation({ summary: `Get user by unique username` })
-    // @ApiResponse({ status: 200 })
-    // @Delete('delete_by_id/:user_id')
-    // deleteUserById(@Param('user_id') user_id: number) {
-    //     return this.usersService.deteteUserById(user_id);
-    // }
+    @ApiOperation({ summary: `Delete company by id` })
+    @ApiResponse({ status: 200 })
+    @Delete('delete_by_id')
+    deleteUserById(@Query('id') id: number) {
+        return this.companyService.deleteCompanyById(id);
+    }
 }
