@@ -14,7 +14,7 @@ class Company {
 
     @ApiProperty({ example: "12-1234567", description: 'FIEN' })
     @Column()
-    fien: string;
+    fein: string;
 
     @ApiProperty({ example: "CA", description: 'State' })
     @Column({ nullable: true })
