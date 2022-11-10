@@ -20,6 +20,10 @@ class Company {
     @Column({ nullable: true })
     state: string;
 
+    @ApiProperty({ example: "Ochko", description: 'N' })
+    @Column({ nullable: true })
+    city: string;
+
     @ApiProperty({ example: 123456, description: 'ZIP' })
     @Column({ nullable: true })
     zip: string;

@@ -14,6 +14,10 @@ export class CreateCompanyDto {
     @IsString()
     state: string;
 
+    @ApiProperty({ example: "Ochko", description: 'N' })
+    @IsString()
+    city: string;
+
     @ApiProperty({ example: 123456, description: 'ZIP' })
     @IsString()
     zip: string;
