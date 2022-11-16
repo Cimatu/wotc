@@ -8,7 +8,6 @@ class Token {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty({ example: 1, description: 'Unique identificator' })
     @OneToOne(() => User)
     @JoinColumn()
     user: User;

@@ -31,12 +31,12 @@ export class CompanyController {
         return this.companyService.getCompanyById(id);
     }
 
-    // @ApiOperation({ summary: `Get user by unique username` })
-    // @ApiResponse({ status: 200, type: User })
-    // @Get('get_by_username/:username')
-    // getUserByUsername(@Param('username') username: string) {
-    //     return this.usersService.getUserByUsername(username);
-    // }
+    @ApiOperation({ summary: `Get all companies` })
+    @ApiResponse({ status: 200, type: [Company] })
+    @Get('get_all')
+    getUserByUsername() {
+        return this.companyService.getAllCompanies();
+    }
 
     @ApiOperation({ summary: `Delete company by id` })
     @ApiResponse({ status: 200 })
@@ -44,4 +44,6 @@ export class CompanyController {
     deleteUserById(@Query('id') id: number) {
         return this.companyService.deleteCompanyById(id);
     }
+
+
 }

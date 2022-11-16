@@ -4,8 +4,9 @@ import { Repository } from 'typeorm';
 import Form from './forms.entity';
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 import puppeteer from 'puppeteer-extra';
-
+import select from 'puppeteer-select'
 import { CreateFormDto } from './dto/create-form.dto';
+import { ElementHandle } from 'puppeteer';
 
 @Injectable()
 export class FormsService {
@@ -14,25 +15,15 @@ export class FormsService {
         private readonly formRepository: Repository<Form>,
     ) { }
 
-    // async createAdmin(dto: SignDto) {
-    //     const admin = await this.userRepository.create(dto);
-    //     admin.role = Role.ADMIN;
-    //     return await this.userRepository.save(admin);
-    // }
+
 
     async fillTheForm() {
         const browser = await puppeteer
             .use(StealthPlugin())
-            .launch({   
+            .launch({
                 headless: false,
                 executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-                // defaultViewport: null,
-                ignoreDefaultArgs: ["--disable-extensions", "--enable-automation"],
-                // args: ['--disable-extensions-except=/path/to/my/extension',
-                //     '--load-extension=/path/to/my/extension',
-                //     '--user-data-dir=%userprofile%\\AppData\\Local\\Chromium\\User Data\\Profile 1'
-                //     //'--profile-directory=ProfileF 1'
-                // ]
+
             })
         const page = await browser.newPage();
 
@@ -40,16 +31,23 @@ export class FormsService {
 
         await page.type('#username', 'wotcwiz22');
         await page.type('#txtPassword', 'Wotcwiz22!');
-
-        await page.screenshot({ path: './loginPasha.png', fullPage: true });
-
-        // const button = await page.$('.submitButton')
-        // await button.click();
         await page.keyboard.press('Enter');
 
-        // const form = await browser.newPage();
+        await page.waitForNavigation();
 
-        // await page.goto('https://eddservices.edd.ca.gov/ewotc/secure/NewApplication.aspx');
+        await page.goto('https://eddservices.edd.ca.gov/ewotc/secure/NewApplication.aspx');
+
+
+        await page.type(`#txtFirstName`, 'txtFirstName'),
+            await page.type(`#txtLastName`, 'txtLastName'),
+            await page.type(`#txtSSN`, '123456789')
+        await page.type(`#txtStreet`, 'txtStreet');
+        await page.type(`#txtCity`, 'txtCity');
+        await page.type(`#txtState`, 'txtState');
+        await page.type(`#txtZip`, '12312');
+
+
+        // const { txtFirstName, txtLastName, txtSSN, txtStreet, txtCity, txtState, txtZip } = dto;
         // await page.type(`#txtFirstName`, 'txtFirstName');
         // await page.type(`#txtLastName`, 'txtLastName');
         // await page.type(`#txtSSN`, 'txtSSN');
@@ -58,42 +56,28 @@ export class FormsService {
         // await page.type(`#txtState`, 'txtState');
         // await page.type(`#txtZip`, 'txtZip');
 
-        await page.screenshot({
-            path: './loginAfterSubmit.png',
-            fullPage: true,
-        });
-
-        // const { txtFirstName, txtLastName, txtSSN, txtStreet, txtCity, txtState, txtZip } = dto;
-        // await page.type(`#txtFirstName`, txtFirstName);
-        // await page.type(`#txtLastName`, txtLastName);
-        // await page.type(`#txtSSN`, txtSSN);
-        // await page.type(`#txtStreet`, txtStreet);
-        // await page.type(`#txtCity`, txtCity);
-        // await page.type(`#txtState`, txtState);
-        // await page.type(`#txtZip`, txtZip);
-
         // const { txtFEIN, txtErName, txtErPhone, txtErStreet, txtErCity, txtErState, txtErZip } = dto;
-        // await page.type(`#txtFEIN`, txtFEIN);
-        // await page.type(`#txtErName`, txtErName);
-        // await page.type(`#txtErPhone`, txtErPhone);
-        // await page.type(`#txtErStreet`, txtErStreet);
-        // await page.type(`#txtErCity`, txtErCity);
-        // await page.type(`#txtErState`, txtErState);
-        // await page.type(`#txtErZip`, txtErZip);
+        // await page.type(`#txtFEIN`, 'txtFEIN');
+        // await page.type(`#txtErName`, 'txtErName');
+        // await page.type(`#txtErPhone`, 'txtErPhone');
+        // await page.type(`#txtErStreet`, 'txtErStreet');
+        // await page.type(`#txtErCity`, 'txtErCity');
+        // await page.type(`#txtErState`, 'txtErState');
+        // await page.type(`#txtErZip`, 'txtErZip');
 
         // const { txtContactName, txtContactPhone, txtContactStreet, txtContactCity, txtContactState,
         //     txtContactZip, ddlGroupNumber, txtInfoDate, txtOfferDate, txtHireDate, txtStartDate } = dto;
-        // await page.type(`#txtContactName`, txtContactName);
-        // await page.type(`#txtContactPhone`, txtContactPhone);
-        // await page.type(`#txtContactStreet`, txtContactStreet);
-        // await page.type(`#txtContactCity`, txtContactCity);
-        // await page.type(`#txtContactState`, txtContactState);
-        // await page.type(`#txtContactZip`, txtContactZip);
-        // await page.select(`#ddlGroupNumber`, ddlGroupNumber);
-        // await page.type(`#txtInfoDate`, txtInfoDate);
-        // await page.type(`#txtOfferDate`, txtOfferDate);
-        // await page.type(`#txtHireDate`, txtHireDate);
-        // await page.type(`#txtStartDate`, txtStartDate);
+        // await page.type(`#txtContactName`, 'txtContactName');
+        // await page.type(`#txtContactPhone`, 'txtContactPhone');
+        // await page.type(`#txtContactStreet`, 'txtContactStreet');
+        // await page.type(`#txtContactCity`, 'txtContactCity');
+        // await page.type(`#txtContactState`, 'txtContactState');
+        // await page.type(`#txtContactZip`, 'txtContactZip');
+        // await page.select(`#ddlGroupNumber`, 'ddlGroupNumber');
+        // await page.type(`#txtInfoDate`, 'txtInfoDate');
+        // await page.type(`#txtOfferDate`, 'txtOfferDate');
+        // await page.type(`#txtHireDate`, 'txtHireDate');
+        // await page.type(`#txtStartDate`, 'txtStartDate');
 
         // const { chkItem1, chkItem2, chkItem3, chkItem4, chkItem5, chkItem6, chkItem7 } = dto;
 
@@ -127,8 +111,8 @@ export class FormsService {
         //     await checkbox.click();
         // }
 
-        // checkbox = await page.$(`#StartNextButton`);
-        // await checkbox.click();
+        const nestPage = await page.$(`#StartNextButton`);
+        await nestPage.click();
 
 
         // const { optPreviousEmployer, txtLastEmploymentDate, txtStartWage, ddlOccupation, optVeteran } = dto;
@@ -143,9 +127,10 @@ export class FormsService {
         //     await radio.click();
         // }
 
-        // await page.type(`#txtStartWage`, txtStartWage);
+        await page.type(`#txtStartWage`, 'txtStartWage');
         // await page.select(`#ddlOccupation`, ddlOccupation);
 
+        await page.screenshot({ path: 'screenshot.png' });
         // if (optVeteran) {
         //     radio = await page.$(`#optVeteran_0`);
         //     await radio.click();
@@ -263,5 +248,20 @@ export class FormsService {
         // await page.type(`#txtEligibilitySources`, txtEligibilitySources);
 
         await browser.close();
+    }
+
+    async filterForms(filter) {
+        const forms = await this.getAllForms();
+        return forms.filter((el) => {
+            if (el.txtFirstName.includes(filter) || el.txtLastName.includes(filter)) {
+                return el;
+            }
+        })
+    }
+
+    async getAllForms() {
+        return await this.formRepository
+            .createQueryBuilder('forms')
+            .getMany();
     }
 }

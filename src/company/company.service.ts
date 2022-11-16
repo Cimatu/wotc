@@ -44,7 +44,6 @@ export class CompanyService {
         return await this.getCompanyById(id);
     }
 
-    
     async getCompanyById(id: number) {
         return await this.companyRepository
             .createQueryBuilder('companies')
@@ -64,6 +63,12 @@ export class CompanyService {
         } else {
             return { message: "Company wasn't deleted" }
         }
+    }
+
+    async getAllCompanies() {
+        return await this.companyRepository
+            .createQueryBuilder('companies')
+            .getMany();
     }
 
 }
