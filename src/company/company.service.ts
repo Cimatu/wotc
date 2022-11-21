@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { from } from 'rxjs';
 import { Repository } from 'typeorm';
 import Company from './company.entity';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -69,6 +70,12 @@ export class CompanyService {
         return await this.companyRepository
             .createQueryBuilder('companies')
             .getMany();
+    }
+
+    async getCompaniesWithPagination(take: number = 10, skip: number = 0) {
+        return from(
+            this.companyRepository.findAndCount({ relations: [], take, skip }).then((data) => data)
+        );
     }
 
 }

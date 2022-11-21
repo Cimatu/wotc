@@ -66,8 +66,4 @@ export class RecoveryService {
             throw new HttpException('Wrong code', HttpStatus.BAD_REQUEST);
         }
     }
-
-    async compareCode(code: number) {
-
-    }
 }
