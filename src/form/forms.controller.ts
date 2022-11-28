@@ -15,8 +15,8 @@ export class FormController {
 
     @ApiOperation({ summary: 'Fill the form' })
     @Post('fill_the_form')
-    signUp() {
-        return this.formsService.fillTheForm()
+    signUp(@Body() dto: CreateFormDto) {
+        return this.formsService.fillTheForm(dto);
     }
 
     @ApiOperation({ summary: 'Get companies with pagination' })
@@ -30,8 +30,9 @@ export class FormController {
         return this.formsService.getFormWithPagination(take, skip);
     }
 
-    getCSV(){
-        return this.formsService.getCSV();
+    @Get('export_to_csv')
+    exportToCsv(){
+        return this.formsService.exportToCsv();
     }
 
 }

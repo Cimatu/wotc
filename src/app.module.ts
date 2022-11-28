@@ -29,7 +29,7 @@ import Company from './company/company.entity';
       database: process.env.POSTGRES_DATABASE,
       entities: [User, Token, RecoveryCode, Form, Company],
       synchronize: true,
-      ssl: { rejectUnauthorized: false },  
+      // ssl: { rejectUnauthorized: false },  
     }),
     UsersModule,
     AuthModule,
